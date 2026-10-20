@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Tolulope Olatunji Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio of Olatunji Tolulope Oluwagbenga: web development, AI automation, research, trading software and digital marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: single column, left-aligned hero with a facts panel, filterable project grid, compact timeline. */
+:root {
+  --bg: #F3F5F9;
+  --surface: #FFFFFF;
+  --fg: #121C2B;
+  --muted: #566277;
+  --line: #D9DFE9;
+  --accent: #2347B5;
+  --accent-soft: #E3EAFB;
+  --tag: #EBEFF6;
+  --good: #1E7A55;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1624; --surface: #142034; --fg: #E5EBF5; --muted: #9AA8C1; --line: #25334C;
+    --accent: #8EB0FF; --accent-soft: #1A2948; --tag: #1A2740; --good: #5CCB9A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1624; --surface: #142034; --fg: #E5EBF5; --muted: #9AA8C1; --line: #25334C;
+  --accent: #8EB0FF; --accent-soft: #1A2948; --tag: #1A2740; --good: #5CCB9A;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { color-scheme: light; scroll-behavior: smooth; }
+body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+.mono { font-family: var(--font-mono); }
+.label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* Top bar */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 22px; flex-wrap: wrap; }
+.brand { font-family: var(--font-mono); font-size: 14px; color: var(--fg); font-weight: 500; }
+.brand span { color: var(--accent); }
+.nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
+.nav a { color: var(--muted); text-decoration: none; }
+.nav a:hover { color: var(--accent); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 40px; padding-block: 48px 56px; border-top: 1px solid var(--line); align-items: start; }
+.hero h1 { font-size: clamp(32px, 5.2vw, 52px); line-height: 1.08; letter-spacing: -0.02em; font-weight: 600; margin: 14px 0 18px; text-wrap: balance; }
+.hero p.lead { font-size: 18px; color: var(--muted); max-width: 56ch; margin: 0 0 26px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 6px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--accent); background: var(--accent); color: var(--bg); cursor: pointer; font-family: var(--font-body); }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+.email-line { font-family: var(--font-mono); font-size: 14px; color: var(--muted); margin-top: 18px; overflow-wrap: anywhere; user-select: all; }
+.facts { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: grid; gap: 16px; }
+.facts div { display: grid; gap: 2px; }
+.facts dt { margin: 0; }
+.facts dd { margin: 0; font-size: 15px; }
+.facts dl { margin: 0; display: grid; gap: 16px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 13px; color: var(--good); }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+
+/* Sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+h2 { font-size: clamp(24px, 3.4vw, 32px); line-height: 1.15; letter-spacing: -0.015em; font-weight: 600; margin: 8px 0 28px; text-wrap: balance; }
+.intro { color: var(--muted); max-width: 62ch; margin: -14px 0 28px; }
+
+/* What I do */
+.do-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 32px; }
+.do-grid h3 { font-size: 17px; margin: 0 0 6px; font-weight: 600; }
+.do-grid p { margin: 0; color: var(--muted); font-size: 15px; }
+.do-grid .label { display: block; margin-bottom: 8px; color: var(--accent); }
+
+/* Projects */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.chip { font-family: var(--font-mono); font-size: 13px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.card[hidden] { display: none !important; }
+.card header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.card h3 { font-size: 18px; line-height: 1.3; margin: 0; font-weight: 600; }
+.card .state { font-family: var(--font-mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 2px 8px; white-space: nowrap; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; display: grid; gap: 4px; }
+.card a.live { font-size: 15px; font-weight: 500; align-self: flex-start; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+.tags span { font-family: var(--font-mono); font-size: 12px; background: var(--tag); color: var(--fg); padding: 3px 8px; border-radius: 4px; }
+.note { font-size: 13px; color: var(--muted); margin-top: 20px; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 32px; }
+.skills h3 { font-size: 15px; font-weight: 600; margin: 0 0 10px; }
+.skills .tags { margin: 0; padding: 0; }
+
+/* Timeline */
+.rows { display: grid; gap: 0; }
+.row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.row:first-child { padding-top: 0; }
+.row .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.row strong { font-weight: 600; display: block; }
+.row span.role { color: var(--muted); font-size: 15px; }
+
+/* Contact */
+.contact p { color: var(--muted); max-width: 56ch; margin: 0 0 22px; }
+footer { padding-block: 32px 40px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 32px 40px; }
+  .projects { grid-template-columns: minmax(0, 1fr); }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  section { padding-block: 40px; }
+}
+</style>
+
+
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">tolulope<span>.</span>olatunji</div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <div>
+      <span class="status">Open to full-time roles and freelance projects</span>
+      <h1>Olatunji Tolulope Oluwagbenga</h1>
+      <p class="lead">Psychology graduate who builds websites, AI automations and research tools. I work across data analysis, web development, algorithmic trading software and digital marketing, and I know the Nigerian, Dutch and UK small-business markets from direct client work.</p>
+      <div class="actions">
+        <a class="btn" href="https://www.linkedin.com/in/tolulope-olatunji-833381331">View LinkedIn</a>
+        <button class="btn ghost" type="button" id="copy-email">Copy email</button>
+      </div>
+      <div class="email-line" id="email-text">Damioluwaseun153@gmail.com</div>
+    </div>
+    <aside class="facts" aria-label="Quick facts">
+      <dl>
+        <div><dt class="label">Based in</dt><dd>Lagos, Nigeria</dd></div>
+        <div><dt class="label">Education</dt><dd>BSc Psychology, Federal University Oye-Ekiti, 2026</dd></div>
+        <div><dt class="label">Trading name</dt><dd>Sammzy, on Fiverr as sammzyscriptings</dd></div>
+        <div><dt class="label">Core stack</dt><dd class="mono" style="font-size:14px">Python · Node.js · HTML/JS · MQL5 · Pine Script</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <section id="about">
+    <span class="label">What I do</span>
+    <h2>Five areas, one working method: build it, test it, ship it.</h2>
+    <div class="do-grid">
+      <div><h3>Web design and development</h3><p>Responsive business sites with booking forms, bilingual toggles and clean deployment.</p></div>
+      <div><h3>AI automation</h3><p>Chatbots, webhook pipelines and Claude API tools that remove repeat manual work.</p></div>
+      <div><h3>Research and data analysis</h3><p>Questionnaire design, scoring workbooks, psychometric scale selection and structured analysis.</p></div>
+      <div><h3>Trading software</h3><p>Expert Advisors, indicators and signal bots for MetaTrader 5, TradingView and Deriv.</p></div>
+      <div><h3>Writing and digital marketing</h3><p>SEO copy, email campaigns, lead generation, proofreading and social media content.</p></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <span class="label">Selected work</span>
+    <h2>Projects I have built and delivered</h2>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="web" aria-pressed="false">Web and AI</button>
+      <button class="chip" type="button" data-filter="trading" aria-pressed="false">Trading tech</button>
+      <button class="chip" type="button" data-filter="research" aria-pressed="false">Research</button>
+      <button class="chip" type="button" data-filter="content" aria-pressed="false">Marketing and content</button>
+    </div>
+
+    <div class="projects" id="projects">
+      <article class="card" data-cat="web">
+        <header><h3>Freshnest cleaning company website</h3><span class="state">Launched</span></header>
+        <p>Full website for a Netherlands-based cleaning business, built for Dutch customers and deployed on GitHub Pages.</p>
+        <ul>
+          <li>Dutch and English language toggle</li>
+          <li>Six service pages, each with its own booking form</li>
+          <li>Form submissions routed to email through Formspree</li>
+          <li>Pricing set for the Dutch market</li>
+        </ul>
+        <a class="live" href="https://damioluwaseun153-commits.github.io/Freshnest-website/">View the live site</a>
+        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Formspree</span><span>GitHub Pages</span></div>
+      </article>
+
+      <article class="card" data-cat="web trading">
+        <header><h3>TradingView to Telegram alert pipeline</h3><span class="state">Built</span></header>
+        <p>A complete alert pipeline that sends TradingView signals to Telegram in real time, running from a local machine.</p>
+        <ul>
+          <li>Node.js webhook server receiving TradingView alerts</li>
+          <li>Cloudflare Tunnel exposing the server securely</li>
+          <li>Batch file that restarts the whole stack automatically</li>
+        </ul>
+        <div class="tags"><span>Node.js</span><span>Webhooks</span><span>Cloudflare Tunnel</span><span>Telegram Bot API</span></div>
+      </article>
+
+      <article class="card" data-cat="trading">
+        <header><h3>Automated trading systems</h3><span class="state">Built</span></header>
+        <p>A set of Expert Advisors, indicators and bots covering gold, forex and Deriv synthetic indices.</p>
+        <ul>
+          <li>Deriv adaptive EA with a loss-learning system that adjusts after losing trades</li>
+          <li>XAUUSD structure scalper with multi-timeframe confluence, order block and fair value gap logic, partial take profit, breakeven and trailing stop</li>
+          <li>Pine Script indicators: market structure (BOS, CHoCH), order blocks, session highlighter with live highs and lows</li>
+          <li>Deriv Bot XML strategies with a capped three-step safety limit</li>
+          <li>Python signal bot sending XAUUSD alerts to Telegram</li>
+        </ul>
+        <div class="tags"><span>MQL5</span><span>Pine Script</span><span>Python</span><span>Deriv XML</span><span>MetaTrader 5</span></div>
+      </article>
+
+      <article class="card" data-cat="web research">
+        <header><h3>AI research drafting tool</h3><span class="state">Built</span></header>
+        <p>A single-file web app that uses the Claude API to draft structured academic documents and exports them as formatted Word files.</p>
+        <ul>
+          <li>Templates for several Nigerian university departments</li>
+          <li>Enforces formatting rules such as font, spacing and citation style</li>
+          <li>Runs from one HTML file with no server</li>
+        </ul>
+        <div class="tags"><span>Claude API</span><span>JavaScript</span><span>docx</span><span>FileSaver.js</span></div>
+      </article>
+
+      <article class="card" data-cat="research">
+        <header><h3>Research methods toolkit</h3><span class="state">Delivered</span></header>
+        <p>Practical tools for quantitative psychology research, from instrument selection to analysis.</p>
+        <ul>
+          <li>Formatted questionnaires built on validated, published scales</li>
+          <li>Excel scoresheets with automated scoring formulas</li>
+          <li>Psychometric scale sourcing and documentation</li>
+          <li>Worked Chapter 4 analysis layouts for results reporting</li>
+        </ul>
+        <div class="tags"><span>Excel</span><span>Psychometrics</span><span>Data analysis</span><span>Research design</span></div>
+      </article>
+
+      <article class="card" data-cat="research">
+        <header><h3>Nigerian Pidgin and Standard English study</h3><span class="state">Project defence</span></header>
+        <p>A qualitative, library-based project on how Nigerian Pidgin affects Standard English among Nigerian undergraduates, drawing on seven journal articles.</p>
+        <ul>
+          <li>Theory: Fishman's Domain Analysis and Language Transfer Theory</li>
+          <li>Five chapters, plus a prepared defence presentation and panel Q and A</li>
+        </ul>
+        <div class="tags"><span>Qualitative research</span><span>Sociolinguistics</span><span>Literature review</span></div>
+      </article>
+
+      <article class="card" data-cat="web">
+        <header><h3>AI automation training programme</h3><span class="state">In progress</span></header>
+        <p>A self-directed, eight-phase roadmap for AI automation, with written deep-dive guides for each phase I complete.</p>
+        <ul>
+          <li>Phase 1 guide: how large language models work</li>
+          <li>Phase 2 guide: prompt engineering in practice</li>
+        </ul>
+        <div class="tags"><span>LLMs</span><span>Prompt engineering</span><span>Automation</span></div>
+      </article>
+
+      <article class="card" data-cat="web">
+        <header><h3>WhatsApp AI assistant</h3><span class="state">Started</span></header>
+        <p>An AI assistant for businesses on WhatsApp, planned on the Meta WhatsApp Business API with cloud hosting on Railway.</p>
+        <div class="tags"><span>WhatsApp Business API</span><span>Railway</span><span>Chatbots</span></div>
+      </article>
+
+      <article class="card" data-cat="content">
+        <header><h3>Local business audits and outreach</h3><span class="state">Ongoing</span></header>
+        <p>Website audits and outreach for small service businesses in the UK and the Netherlands.</p>
+        <ul>
+          <li>Audit of real website problems, used as the hook for each email</li>
+          <li>Plain-text cold emails written around Google Business Profile setup and SEO</li>
+        </ul>
+        <div class="tags"><span>SEO</span><span>Google Business Profile</span><span>Email marketing</span><span>Lead generation</span></div>
+      </article>
+
+      <article class="card" data-cat="content">
+        <header><h3>Skincare short-form content brand</h3><span class="state">Active</span></header>
+        <p>A skincare account (Emilia Joanne) publishing infographic posts on masks, morning and evening routines and common mistakes, now being turned into short videos with scripts.</p>
+        <div class="tags"><span>Content strategy</span><span>Scriptwriting</span><span>TikTok</span></div>
+      </article>
+    </div>
+    <p class="note">Trading tools are software projects for analysis and automation. They are not financial advice.</p>
+  </section>
+
+  <section id="skills">
+    <span class="label">Skills</span>
+    <h2>Tools and methods</h2>
+    <div class="skills">
+      <div><h3>Build</h3><div class="tags"><span>Web design</span><span>HTML / CSS / JS</span><span>Node.js</span><span>Python</span><span>GitHub Pages</span></div></div>
+      <div><h3>Automate</h3><div class="tags"><span>AI automation</span><span>Prompt engineering</span><span>Claude API</span><span>Webhooks</span><span>Chatbots</span></div></div>
+      <div><h3>Trade tech</h3><div class="tags"><span>MQL5</span><span>Pine Script</span><span>Deriv XML bots</span><span>MetaTrader 5</span><span>TradingView</span></div></div>
+      <div><h3>Analyse</h3><div class="tags"><span>Data analysis</span><span>Excel</span><span>Psychometrics</span><span>Research design</span><span>Critical thinking</span></div></div>
+      <div><h3>Market and write</h3><div class="tags"><span>Digital marketing strategy</span><span>SEO</span><span>Email marketing</span><span>Lead generation</span><span>Creative writing</span><span>Proofreading</span><span>Social media</span></div></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <span class="label">Experience</span>
+    <h2>Work history and leadership</h2>
+    <div class="rows">
+      <div class="row"><div class="when">2023 – Present</div><div><strong>Sammzy Research Consultant</strong><span class="role">Research Specialist and Data Analyst</span></div></div>
+      <div class="row"><div class="when">2023 – Present</div><div><strong>SamTech Web and AI Integrate</strong><span class="role">Web Designer, Web Developer and Automation Engineer</span></div></div>
+      <div class="row"><div class="when">2019 – Present</div><div><strong>SammzyScriptings</strong><span class="role">Creative Writer, SEO Specialist, Proofreader, Email Marketer and Lead Generation Specialist</span></div></div>
+      <div class="row"><div class="when">2019 – Present</div><div><strong>Kingdom Stars Drama Ministry</strong><span class="role">Scriptwriter, Set Director and Instructor</span></div></div>
+      <div class="row"><div class="when">2022 – 2026</div><div><strong>Federal University Oye-Ekiti</strong><span class="role">General Governor, Department of Psychology (Class Representative)</span></div></div>
+      <div class="row"><div class="when">2018</div><div><strong>Crystal Global Microfinance Bank</strong><span class="role">Procurement Officer</span></div></div>
+      <div class="row"><div class="when">2018</div><div><strong>Mefon Multimedia Institute</strong><span class="role">Theatre Instructor</span></div></div>
+      <div class="row"><div class="when">2017 – 2018</div><div><strong>Damasco Steel Work Nigeria Limited</strong><span class="role">Staff, Ogun State</span></div></div>
+      <div class="row"><div class="when">2016 – 2017</div><div><strong>God's Will International School</strong><span class="role">Teacher, Ogun State</span></div></div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <span class="label">Contact</span>
+    <h2>Have a role or a project in mind?</h2>
+    <p>Send me a short note about what you need and your timeline. I reply with a clear plan and a quote for freelance work.</p>
+    <div class="actions">
+      <a class="btn" href="https://www.linkedin.com/in/tolulope-olatunji-833381331">Message on LinkedIn</a>
+      <button class="btn ghost" type="button" id="copy-email-2">Copy email address</button>
+    </div>
+    <div class="email-line">Damioluwaseun153@gmail.com</div>
+  </section>
+
+  <footer>
+    <span>Olatunji Tolulope Oluwagbenga, Lagos, Nigeria</span>
+    <span id="copy-status" aria-live="polite"></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var EMAIL = "Damioluwaseun153@gmail.com";
+  var status = document.getElementById("copy-status");
+
+  function copyEmail() {
+    var done = function (msg) { status.textContent = msg; setTimeout(function () { status.textContent = ""; }, 3000); };
+    var fallback = function () {
+      var node = document.getElementById("email-text");
+      var range = document.createRange();
+      range.selectNodeContents(node);
+      var sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+      done("Email selected. Press copy.");
+    };
+    try {
+      navigator.clipboard.writeText(EMAIL).then(function () { done("Email copied"); }, fallback);
+    } catch (e) { fallback(); }
+  }
+  ["copy-email", "copy-email-2"].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("click", copyEmail);
+  });
+
+  var chips = document.querySelectorAll(".chip");
+  var cards = document.querySelectorAll("#projects .card");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.getAttribute("data-filter");
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      cards.forEach(function (card) {
+        var cats = card.getAttribute("data-cat").split(" ");
+        card.hidden = !(f === "all" || cats.indexOf(f) !== -1);
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
